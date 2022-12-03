@@ -1,0 +1,46 @@
+server:
+  port: 9008 #端口
+
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: crm-auth
+      name: crm
+      profile: auth
+      label: master
+  application:
+    name: crm-auth # 名称
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/crm-project?serverTimezone=UTC&useunicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3
+    # password:
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: BASIC # 日志级别
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

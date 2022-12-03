@@ -1,0 +1,54 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: crm-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: crm-customer         #规则名称
+          uri: lb://crm-customer   #目标服务地址
+          predicates:   #路由条件
+            - Path=/api/customer/**
+          filters:  #过滤器，去掉前2部分前缀后再转发，/api/test就被去掉了
+            - StripPrefix=2
+        - id: crm-auth        #规则名称
+          uri: lb://crm-auth   #目标服务地址
+          predicates: #路由条件
+            - Path=/api/auth/**
+          filters: #过滤器，
+            - StripPrefix=2
+        - id: crm-marketing
+          uri: lb://crm-marketing
+          predicates:
+             - Path=/api/marketing/**
+          filters:
+             - StripPrefix=2
+        - id: crm-report
+          uri: lb://crm-report
+          predicates:
+            - Path=/api/report/**
+          filters:
+            - StripPrefix=2
+        - id: crm-service
+          uri: lb://crm-service
+          predicates:
+           - Path=/api/service/**
+          filters:
+           - StripPrefix=2
+        - id: crm-system
+          uri: lb://crm-system
+          predicates:
+            - Path=/api/system/**
+          filters:
+            - StripPrefix=2
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+swagger:
+  global-operation-parameters:

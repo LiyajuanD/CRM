@@ -1,0 +1,16 @@
+server:
+  port: 8081 #端口
+
+spring:
+  application:
+    name: eureka-server # 名称
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka   #自己也是服务，把自己注册到注册中心
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000

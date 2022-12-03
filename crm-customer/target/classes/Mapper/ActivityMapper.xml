@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.crmcustomer.mapper.ActivityMapper">
+
+    <select id="getAll" resultMap="act">
+         select cst_activity.*, cst_customer.*
+         from cst_activity , cst_customer
+         where cst_activity.atv_id = #{Actid}
+           and cst_activity.atv_cust_id = cst_customer.cust_id
+    </select>
+
+    <resultMap id="act" type="com.briup.crmcustomer.entity.ext.ActivityExt">
+        <id property="atvId" column="atv_id"/>
+        <result property="atvCustName" column="atv_cust_name"/>
+        <result property="atvPlace" column="atv_place"/>
+        <result column="atv_memo" property="atvMemo"/>
+        <association property="customer" javaType="com.briup.crmcustomer.entity.Customer">
+            <id property="custId" column="cust_id"/>
+            <result column="cust_name" property="custName"/>
+            <result column="cust_region" property="custRegion"/>
+            <result column="cust_manager_id" property="custManagerId"/>
+            <result column="cust_manager_name" property="custManagerName"/>
+            <result column="cust_level_label" property="custLevelLabel"/>
+            <result column="cust_satisfy" property="custSatisfy"/>
+            <result column="cust_credit" property="custCredit"/>
+            <result column="cust_addr" property="custAddr"/>
+            <result column="cust_zip" property="custZip"/>
+            <result column="cust_tel" property="custTel"/>
+            <result column="cust_fax" property="custFax"/>
+            <result column="cust_website" property="custWebsite"/>
+            <result column="cust_licence_no" property="custLicenceNo"/>
+            <result column="cust_chieftain" property="custChieftain"/>
+            <result column="cust_bankroll" property="custBankroll"/>
+            <result column="cust_turnover" property="custTurnover"/>
+            <result column="cust_bank" property="custBank"/>
+            <result column="cust_bank_account" property="custBankAccount"/>
+            <result column="cust_local_tax_no" property="custLocalTaxNo"/>
+            <result column="cust_national_tax_no" property="custNationalTaxNo"/>
+            <result column="cust_status" property="custStatus"/>
+        </association>
+    </resultMap>
+
+  <!--  <resultMap id="cust" type="com.briup.crmcustomer.entity.Customer">
+        <id
+    </resultMap>-->
+</mapper>

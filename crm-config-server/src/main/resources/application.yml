@@ -1,0 +1,22 @@
+#配置中心
+server:
+  port: 9005
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/lyjdyr/crm-config.git
+          search-paths: crm
+          username: lyjdyr
+          password: Lyj03053721
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+     defaultZone: http://localhost:8081/eureka/

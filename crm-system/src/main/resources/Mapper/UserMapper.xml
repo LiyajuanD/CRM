@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.crmsystem.mapper.UserMapper">
+
+    <select id="findByUsername" resultMap="user">
+        select * from sys_user where usr_name = #{name}
+    </select>
+    <select id="findBynameAndPwd" resultMap="user">
+        select * from sys_user where usr_name = #{param1} and usr_password = #{param2}
+    </select>
+    <resultMap id="user" type="com.briup.crmsystem.entity.User">
+        <id property="usrId" column="usr_id"/>
+        <result column="usr_name" property="usrName"/>
+        <result column="usr_password" property="usrPassword"/>
+        <result column="usr_email" property="usrEmail"/>
+        <result column="usr_role_name" property="usrRoleName"/>
+        <result column="usr_flag" property="usrFlag"/>
+        <result column="usr_role_id" property="usrRoleId"/>
+    </resultMap>
+</mapper>
